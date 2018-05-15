@@ -6,4 +6,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#e0e0e0</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorLectureON">#3498DB</color>
+    <color name="colorLectureOFF">#34495E</color>
 </resources>

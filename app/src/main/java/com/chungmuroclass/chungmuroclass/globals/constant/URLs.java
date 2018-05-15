@@ -23,6 +23,9 @@ public enum URLs
     // 회원가입
     SIGNUP(MAIN_URL.getValue() + "/school/students/"),
 
+    // 강의목록
+    LECTURES(MAIN_URL.getValue() + "/school/lectures/?page="),
+
 
 	NOTICE_DETAIL(MAIN_URL.getValue() + "/halla/m/notice/detail");
 
