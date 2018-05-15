@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "811544408597",
+    "firebase_url": "https://chungmuroclass.firebaseio.com",
+    "project_id": "chungmuroclass",
+    "storage_bucket": "chungmuroclass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811544408597:android:f7e3a5ca1ba18314",
+        "android_client_info": {
+          "package_name": "com.chungmuroclass.chungmuroclass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811544408597-7o2ogdd8h0einja93ag3ttfldun5h3ou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chungmuroclass.chungmuroclass",
+            "certificate_hash": "e163f704eb3b7e876c51f112665daa647d697415"
+          }
+        },
+        {
+          "client_id": "811544408597-k4r5r5oujenks2onlmlmv2uus5377m6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASnAzKv00gz7MCqDDMNupg4KGQisTBjE8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811544408597-k4r5r5oujenks2onlmlmv2uus5377m6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

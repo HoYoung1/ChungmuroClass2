@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ChungmuroClass</string>
+
+    <string name="title">Dongguk.Udrims</string>
+    <string name="team_name">TEAM by ChungmuroClass</string>
+
+
+    <string name="facebook_app_id">233039793940431</string>
+    <string name="fb_login_protocol_scheme">fb233039793940431</string>
+    <string name="connecting">연결중입니다.</string>
+
+    <string name="Please_upload">본인의 사진을 업로드 해 주세요 스마트 출석체크에 사용됩니다.</string>
+    <string name="next">next ></string>
+    <string name="Notice1">참고 : 설정해놓은 사진은 타인에게 공개되지 않으며 프로젝트가 끝난 후 모두 파기됩니다. 위 프로필 사진과 수업중에 찍힌 사진 얼굴을 비교하여 본인 일치여부를 확인합니다. 프로필 사진과 이름을 올바르게 설정하지 않은경우 본인 확인이 불가합니다.</string>
+    <string name="Complete">완료 ></string>
+    <string name="Please_name">본인의 이름을 적어주세요(공백은안돼요~)</string>
+    <string name="edtHint">HoYoungKim(←이런식으로영어로만작성 공백도안돼요!)</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ChungmuroClass">ChungmuroClass</string>
+</resources>
