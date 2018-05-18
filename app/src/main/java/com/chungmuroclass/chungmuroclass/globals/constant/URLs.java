@@ -26,12 +26,14 @@ public enum URLs
     // 강의목록
     LECTURES(MAIN_URL.getValue() + "/school/lectures/?page="),
 
-
+    // 수업에 참가하기전 참여할껀지 묻는거
     STUDENT_ISTAKEN(MAIN_URL.getValue() + "/school/lectures/istaken/"),
 
+    // 수업에 참여하기
     TAKE_CLASS(MAIN_URL.getValue() + "/school/lectures/take/"),
 
-	NOTICE_DETAIL(MAIN_URL.getValue() + "/halla/m/notice/detail");
+    // 강의 세부정보
+    LECTURE_DETAIL(MAIN_URL.getValue() + "/school/lectures/");
 
     private String value;
 

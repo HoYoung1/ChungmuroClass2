@@ -97,4 +97,39 @@
             </ScrollView>
         </LinearLayout>
     </ScrollView>
+
+
+
+    <RelativeLayout
+        android:id="@+id/main_waiting_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#10000000"
+        android:clickable="true"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/main_waiting_progress"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connecting"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

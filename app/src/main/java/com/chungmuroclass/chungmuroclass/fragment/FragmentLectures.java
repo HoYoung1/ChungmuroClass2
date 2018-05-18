@@ -94,11 +94,18 @@ public class FragmentLectures extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
 
-
-                try {
-                    goPostIsTaken(URLs.STUDENT_ISTAKEN.getValue(), listitem.get(position).getId());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                Log.d("호영아 ", "state확인 "+listitem.get(position).getStateLecture());
+                if(listitem.get(position).getStateLecture().equals("end")){
+                    //만약 종료 상태인 수업을 클릭할 경우 '수업 참가' 기능 없이 바로 디테일 액티비티로 넘어간다.
+                    int lecid = listitem.get(position).getId();
+                    goLectureDetail(lecid);
+                }
+                else {
+                    try {
+                        goPostIsTaken(URLs.STUDENT_ISTAKEN.getValue(), listitem.get(position).getId());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
