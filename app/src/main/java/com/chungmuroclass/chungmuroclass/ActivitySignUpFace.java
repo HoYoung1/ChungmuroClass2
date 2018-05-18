@@ -41,7 +41,6 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.chungmuroclass.chungmuroclass.Util.PermissionUtility;
-import com.chungmuroclass.chungmuroclass.globals.Globals;
 import com.chungmuroclass.chungmuroclass.globals.constant.CommonConst;
 
 import java.io.ByteArrayOutputStream;
@@ -246,7 +245,7 @@ public class ActivitySignUpFace extends AppCompatActivity {
 
     private void getDialogSelectCamera() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
-        View mView = getLayoutInflater().inflate(R.layout.dialogprofile, null);
+        View mView = getLayoutInflater().inflate(R.layout.dialogcamera, null);
 
         //다이알로그에있는 버튼
         ConstraintLayout btnTakePhoto;

@@ -27,6 +27,10 @@ public enum URLs
     LECTURES(MAIN_URL.getValue() + "/school/lectures/?page="),
 
 
+    STUDENT_ISTAKEN(MAIN_URL.getValue() + "/school/lectures/istaken/"),
+
+    TAKE_CLASS(MAIN_URL.getValue() + "/school/lectures/take/"),
+
 	NOTICE_DETAIL(MAIN_URL.getValue() + "/halla/m/notice/detail");
 
     private String value;

@@ -35,11 +35,11 @@ public class AdapterLecture extends RecyclerView.Adapter<ViewHolderLecture> {
 
         View baseView = View.inflate(mContext, R.layout.item_lecture,null);
 
-//        WindowManager windowManager = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
-////        int width = windowManager.getDefaultDisplay().getWidth()*2/5;
-////        int height = width;
+        WindowManager windowManager = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+         int width = windowManager.getDefaultDisplay().getWidth();
+        int height = width/4;
 //        //int height = windowManager.getDefaultDisplay().getHeight();
-//        baseView.setLayoutParams(new RecyclerView.LayoutParams(width, RecyclerView.LayoutParams.MATCH_PARENT));
+        baseView.setLayoutParams(new RecyclerView.LayoutParams(width, height));
 
 
 
