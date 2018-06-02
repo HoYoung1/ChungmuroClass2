@@ -15,17 +15,7 @@ https://github.com/HoYoung1/Chungmuroclass
 
 <p>
 <img src="1.png"  width="250">
-
-</p>
-
-<p>
 <img src="2.png"  width="250">
-</p>
-
-<p>
 <img src="3.png"  width="250">
-</p>
-
-<p>
 <img src="4.png"  width="250">
 </p>
