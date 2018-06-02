@@ -14,7 +14,7 @@ https://github.com/HoYoung1/Chungmuroclass
 설명 : 사용자(학생)들은 O,X 표시와 시간대별 찍힌 사진을 확인하여 본인의 출석체크가 정상적으로 처리되었는지 확인 가능
 
 
-<img src="1.png"  width="200">
-<img src="2.png"  width="200">
-<img src="3.png"  width="200">
-<img src="4.png"  width="200">
+<img src="1.png"  >
+<img src="2.png" >
+<img src="3.png" >
+<img src="4.png">
