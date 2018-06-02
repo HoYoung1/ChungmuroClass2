@@ -96,6 +96,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:hint="@string/edtHint"
+                android:maxLines="1"
                 android:background="@null" />
 
         </android.support.design.widget.TextInputLayout>

@@ -54,7 +54,7 @@ public class AdapterLecture extends RecyclerView.Adapter<ViewHolderLecture> {
 
         holder.txtLectureName.setText(item.getClass_name());
         holder.txtProfessor.setText(item.getProfessor());
-        holder.txtTime.setText(item.getClass_start());
+        holder.txtTime.setText("시작시간 : " +item.getClass_start());
 
         //end,on있음.
         if(item.getStateLecture().equals("on")){

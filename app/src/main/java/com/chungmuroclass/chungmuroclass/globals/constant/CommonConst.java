@@ -5,6 +5,6 @@ package com.chungmuroclass.chungmuroclass.globals.constant;
  */
 
 public class CommonConst {
-    public final static String S3KEY = "AKIAJU6USHQAS3ODOZPA\n";
-    public final static String S3SECRET = "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";
+    public final static String S3KEY = "AKIAIFU7F3SFGDOEMDRA";
+    public final static String S3SECRET = "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";
 }

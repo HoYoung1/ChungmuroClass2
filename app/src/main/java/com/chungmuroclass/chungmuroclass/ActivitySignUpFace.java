@@ -179,7 +179,7 @@ public class ActivitySignUpFace extends AppCompatActivity {
         Log.d("호영아s3에파일이름NameOfFile", NameOfFile);
 
         TransferObserver uploadObserver =
-                transferUtility.upload("jsaS3/" + NameOfFile + "." + getFileExtension(tempUri), finalFile, md, CannedAccessControlList.PublicRead);
+                transferUtility.upload( NameOfFile + "." + getFileExtension(tempUri), finalFile, md, CannedAccessControlList.PublicRead);
 
         uploadObserver.setTransferListener(new TransferListener() {
             @Override
@@ -213,11 +213,13 @@ public class ActivitySignUpFace extends AppCompatActivity {
     }
 
     private void goToNextActivity() {
+
         Intent intent = new Intent(mContext,ActivitySignUpName.class);
         intent.putExtra("student_id",student_id);
         intent.putExtra("userName",userName);
         intent.putExtra("imgURL",NameOfFIleWithEX);
         startActivity(intent);
+        finish();
     }
 
     private String getFileExtension(Uri uri) {

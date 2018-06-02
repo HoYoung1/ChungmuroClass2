@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,11 +24,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.chungmuroclass.chungmuroclass.globals.Globals;
 import com.chungmuroclass.chungmuroclass.globals.constant.URLs;
 import com.chungmuroclass.chungmuroclass.model.Detail;
-import com.chungmuroclass.chungmuroclass.model.Lecture;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -38,19 +38,18 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
-
 
 /**
  * Created by HY on 2018-05-19.
  * 개헬입니다소스코드
  * 표형식으로 데이터를 추가하기위해서 쌩쑈를햇습니다
- *
+ * 2차원행렬로했으면 더 잘했을텐데..... 흠 아쉽습니다 코드가...
+ * <p>
  * 간단히 설명해보겠습니다
  * 예를들어 학생이 3명있다면(행이3개)
  * 1행 첫번째 값 추가후 2행 첫번째값 3행 첫번째값 -> 1행 두번째값 2행 두번째값 3행 두번째값 -> 1행 세번째값 ...
  * 이런식으로 추가합니다~ 같은 칼럼에 있는 값들을 다넣고 두번째 칼럼으로가는형식입니다.
- *
+ * <p>
  * 문제는 지각생의 경우인데 지각생같은 경우에는 값이 없어서 제가임의로 -로 표시되게했는데 이게진짜개헬입니다
  * 이해할려면 해보세요 저는안합니다~
  */
@@ -59,6 +58,7 @@ public class ActivityLectureDetail extends AppCompatActivity {
 
     private ImageView btnBackImage;
     private ImageView imgFaces;
+    private TextView txtTimeCheck;
     private Gson gson;
     private Context mContext;
     private TableLayout myTableLayout;
@@ -72,18 +72,36 @@ public class ActivityLectureDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecture_detail);
 
-        setLayout();
-        setInit();
-
         Intent intent = getIntent();
         lec_id = intent.getIntExtra("id", 0);
         Log.d("호영아", "넘어온 강의 번호 : " + lec_id);
+
+        setLayout();
+        setInit();
+
+
 
         try {
             goGetLectureDetail(URLs.LECTURE_DETAIL.getValue() + lec_id);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        /*Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            //Do Something
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                finish();
+
+                overridePendingTransition(0,0);
+
+                startActivity(getIntent());
+                overridePendingTransition(0,0);
+                //액티비티 새로고침https://stackoverflow.com/questions/3053761/reload-activity-in-android
+            }
+        }, 60000); // 1000ms*/
     }
 
     private void setInit() {
@@ -97,8 +115,9 @@ public class ActivityLectureDetail extends AppCompatActivity {
             }
         });
 
+        Log.d("호영아",URLs.STORAGE.getValue() + lec_id+"_1.jpg");
         Glide.with(mContext)
-                .load(URLs.STORAGE.getValue()+ "KakaoTalk_20180509_022058950.jpg")
+                .load(URLs.STORAGE.getValue() + lec_id+"_1.jpg")
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -112,6 +131,7 @@ public class ActivityLectureDetail extends AppCompatActivity {
                         return false;
                     }
                 })
+                .apply(new RequestOptions().error(R.drawable.notyetpicture))
                 .into(imgFaces);
     }
 
@@ -120,6 +140,7 @@ public class ActivityLectureDetail extends AppCompatActivity {
         imgFaces = (ImageView) findViewById(R.id.imgFaces);
         myTableLayout = (TableLayout) findViewById(R.id.tlGridTable);
         main_waiting_cover = (RelativeLayout) findViewById(R.id.main_waiting_cover);
+        txtTimeCheck = (TextView) findViewById(R.id.txtTimeCheck);
 
     }
 
@@ -166,6 +187,14 @@ public class ActivityLectureDetail extends AppCompatActivity {
                             @Override
                             public void run() {
                                 addView();
+                            }
+                        });
+                    }
+                    else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mContext, "아직 수업이 시작 되지않아 표시할 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -234,12 +263,36 @@ public class ActivityLectureDetail extends AppCompatActivity {
 
 
         txtTitle[2] = new TextView(this);
-        txtTitle[2].setText("시작");
+        txtTitle[2].setText("0분");
         txtTitle[2].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         txtTitle[2].setGravity(Gravity.CENTER);
         txtTitle[2].setTypeface(Typeface.SERIF, Typeface.BOLD);
         txtTitle[2].setPadding(20, 20, 20, 20);
-        txtTitle[2].setBackgroundColor(Color.rgb(51, 51, 51));
+        //txtTitle[2].setBackgroundColor(Color.rgb(51, 51, 51));
+        txtTitle[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                main_waiting_cover.setVisibility(View.VISIBLE);
+                Glide.with(mContext)
+                        .load(URLs.STORAGE.getValue() + lec_id + "_" + 1 + ".jpg")
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                main_waiting_cover.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                main_waiting_cover.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .apply(new RequestOptions().error(R.drawable.notyetpicture))
+                        .into(imgFaces);
+                txtTimeCheck.setText("현재 사진은 '"+"0분'에 찍힌 사진입니다.");
+            }
+        });
 
 
         //3번째 칼럼부터 62번째칼럼까지(시작~ 60번째까지)
@@ -248,8 +301,38 @@ public class ActivityLectureDetail extends AppCompatActivity {
             txtTitle[i].setText(i - 2 + "분");
             txtTitle[i].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             txtTitle[i].setGravity(Gravity.CENTER);
-            txtTitle[i].setTypeface(Typeface.SERIF, Typeface.NORMAL);
+            txtTitle[i].setTypeface(Typeface.SERIF, Typeface.BOLD);
             txtTitle[i].setPadding(20, 20, 20, 20);
+
+            final int timeM = i;
+            final String imgNameInBucket = lec_id + "_" + (i - 1) + ".jpg";
+            Log.d("호영아", URLs.STORAGE.getValue() + imgNameInBucket);
+            txtTitle[i].setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    main_waiting_cover.setVisibility(View.VISIBLE);
+                    Glide.with(mContext)
+                            .load(URLs.STORAGE.getValue() + imgNameInBucket)
+                            .listener(new RequestListener<Drawable>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    main_waiting_cover.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                    main_waiting_cover.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            })
+                            .apply(new RequestOptions().error(R.drawable.notyetpicture))
+                            .into(imgFaces);
+
+                    txtTimeCheck.setText("현재 사진은 '"+(timeM-2)+"분'에 찍힌 사진입니다.");
+                }
+            });
         }
 
         //68개의 텍스트뷰를 row에추가
@@ -290,19 +373,19 @@ public class ActivityLectureDetail extends AppCompatActivity {
         int numOfCheck = detail.getLecchecks().size();
         TextView[] txtchk = new TextView[numOfCheck];
 
-        int chFlag = 1;
+        int chFlag = 0;
         int m = 0;
         // m 은 행 번호를 의미합니다
         // chFlag는 칼럼을 의미하기 위해서 사용했습니다.
 
 
-        //서버에서 준값을 확인후 col_index가 1부터 시작하지 않는다면 수업이 맨처음 시작할때 학생이 아무도 없었다는 얘기가됩니다. -표시를 다 넣어줘야합니다
-        if (detail.getLecchecks().get(0).getCol_index() != 1) {
+        //서버에서 준값을 확인후 col_index가 0부터 시작하지 않는다면 수업이 맨처음 시작할때 학생이 아무도 없었다는 얘기가됩니다. -표시를 다 넣어줘야합니다
+        if (detail.getLecchecks().get(0).getCol_index() != 0) {
             Log.d("호영아", "##############################################################");
-            Log.d("호영아", "첫번째 인덱스가 1이아니다 -표시 시키고시작해야한다.");
+            Log.d("호영아", "첫번째 인덱스가 0이아니다 -표시 시키고시작해야한다.");
 
-            //문제는 1이 아닐때다 전에있는 칼럼을 전부 '-'표시 시켜야하기때문!
-            int _count = detail.getLecchecks().get(0).getCol_index() - 1;
+            //문제는 0이 아닐때다 전에있는 칼럼을 전부 '-'표시 시켜야하기때문!
+            int _count = detail.getLecchecks().get(0).getCol_index();
             Log.d("호영아3", "_count : " + _count);
             TextView[] txtBlank = new TextView[numOfStu * _count];
 
@@ -324,9 +407,14 @@ public class ActivityLectureDetail extends AppCompatActivity {
 
         }
 
+        //maxIndex 는 현재 몇분인지 표시하기위함 , 현재시간의 사진을 로드한다.
+        int maxIndex = -1;
 
         // 서버에서 받은 Check리스트를 가지고 O X 표시를 한다. 지각생이없고 정상적으로 수업이끝났다면 학생수*칼럼수60개(60분) 가 될것이다.
         for (int j = 0; j < numOfCheck; j++) {
+            if(maxIndex < detail.getLecchecks().get(j).getCol_index()) {
+                maxIndex = detail.getLecchecks().get(j).getCol_index();
+            }
             Log.d("호영아 값확인", "numOfCheck : " + numOfCheck);
             txtchk[j] = new TextView(this);
             txtchk[j].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
@@ -335,14 +423,14 @@ public class ActivityLectureDetail extends AppCompatActivity {
             txtchk[j].setPadding(20, 20, 20, 20);
 
             //서버로부터 오는 similarity 값이 80보다 크다면 O로 체크한다.
-            if (detail.getLecchecks().get(j).getSimilarity() > 80) {
+            if (detail.getLecchecks().get(j).getSimilarity() == 101){
+                //101은 오류처리입니다.. '?' 로 처리하면됨
+                txtchk[j].setText("?");
+            }else if(detail.getLecchecks().get(j).getSimilarity() > 80){
                 txtchk[j].setText("O");
-            } else {
+            }else {
                 txtchk[j].setText("X");
             }
-
-
-
 
             if (chFlag == detail.getLecchecks().get(j).getCol_index()) {
                 rowStu[m].addView(txtchk[j]);
@@ -398,7 +486,33 @@ public class ActivityLectureDetail extends AppCompatActivity {
             myTableLayout.addView(vv);
         }
 
+
         main_waiting_cover.setVisibility(View.GONE);
+
+        //maxIndex 는 현재 몇분인지 표시하기위함 , 현재시간의 사진을 로드한다.
+        if(maxIndex!=-1){
+            int timeIndex = maxIndex+1;
+            Log.d("호영아timeIndex : ",timeIndex+"");
+            Glide.with(mContext)
+                    .load(URLs.STORAGE.getValue() + lec_id+"_"+timeIndex+".jpg")
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            main_waiting_cover.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            main_waiting_cover.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .apply(new RequestOptions().error(R.drawable.notyetpicture))
+                    .into(imgFaces);
+
+            txtTimeCheck.setText("현재 사진은 '"+timeIndex+"분'에 찍힌 사진입니다.");
+        }
     }
 
 

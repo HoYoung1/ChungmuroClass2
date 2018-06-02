@@ -205,6 +205,7 @@ public class ActivitySignUpName extends AppCompatActivity {
     }
 
     private void goMainActivity() {
+        finish();
         Intent intent = new Intent(mContext,ActivityMain.class);
         startActivity(intent);
     }
