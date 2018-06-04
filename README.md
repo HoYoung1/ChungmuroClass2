@@ -1,4 +1,4 @@
-# ChungmuroClass2
+﻿# ChungmuroClass2
 This is Android source code
 
 
@@ -16,6 +16,11 @@ https://github.com/HoYoung1/Chungmuroclass
 <p>
 <img src="1.png" width ="250" >
 <img src="2.png"  width ="250">
+</p>
+<p>
 <img src="3.png" width ="250" >
 <img src="4.png" width ="250">
+</p>
+<p>
+<img src="액티비티설명.JPG" width ="300">
 </p>
