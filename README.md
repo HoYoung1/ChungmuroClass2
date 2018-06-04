@@ -13,6 +13,13 @@ https://github.com/HoYoung1/Chungmuroclass
 소프트웨어 : 안드로이드  
 설명 : 사용자(학생)들은 O,X 표시와 시간대별 찍힌 사진을 확인하여 본인의 출석체크가 정상적으로 처리되었는지 확인 가능  
 
+
+## 액티비티 설명요약 ##
+<p>
+<img src="액티비티설명.JPG" width ="400">
+</p>
+
+## 사용자(학생) 화면 ##
 <p>
 <img src="1.png" width ="250" >
 <img src="2.png"  width ="250">
@@ -20,7 +27,4 @@ https://github.com/HoYoung1/Chungmuroclass
 <p>
 <img src="3.png" width ="250" >
 <img src="4.png" width ="250">
-</p>
-<p>
-<img src="액티비티설명.JPG" width ="300">
 </p>
