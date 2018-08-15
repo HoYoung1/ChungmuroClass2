@@ -426,11 +426,17 @@ public class ActivityLectureDetail extends AppCompatActivity {
             if (detail.getLecchecks().get(j).getSimilarity() == 101){
                 //101은 오류처리입니다.. '?' 로 처리하면됨
                 txtchk[j].setText("?");
-            }else if(detail.getLecchecks().get(j).getSimilarity() > 80){
-                txtchk[j].setText("O");
+            }else if(detail.getLecchecks().get(j).getSimilarity() >= 80){
+                txtchk[j].setText(String.valueOf(detail.getLecchecks().get(j).getSimilarity()));
+
             }else {
-                txtchk[j].setText("X");
+                txtchk[j].setText(String.valueOf(detail.getLecchecks().get(j).getSimilarity()));
+                txtchk[j].setTextColor(Color.RED);
             }
+
+
+
+
 
             if (chFlag == detail.getLecchecks().get(j).getCol_index()) {
                 rowStu[m].addView(txtchk[j]);
